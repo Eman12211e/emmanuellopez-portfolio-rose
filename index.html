@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emmanuel Lopez · Mechanical Engineer</title>
+<meta name="description" content="Portfolio of Emmanuel Lopez: mechanical engineer, undergraduate researcher, and software builder.">
+<meta name="theme-color" content="#141a35">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23141a35'/%3E%3Cpath d='M5 3h6v1h2v2h1v4h-1v2h-2v1H5v-1H3v-2H2V6h1V4h2z' fill='%234c5fc4'/%3E%3Cpath d='M6 5h4v1h1v4h-1v1H6v-1H5V6h1z' fill='%238fa2f0'/%3E%3Crect x='7' y='7' width='2' height='2' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fondamento:ital@0;1&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#121834; --indigo:#232c58; --mist:#5a70a5; --moon:#eef0ff;
+  --gold:#f2c66d; --ember:#ffbf5e;
+  --wood:#6b3f1d; --wood-dk:#3b210d; --wood-lt:#c98a3c;
+  --parch:#f4e4c1; --parch-dk:#e2c995; --ink:#3a2412; --ink-soft:#6b4a2b;
+  --rose:#4c5fc4; --rose-lt:#8fa2f0; --leaf:#4e8a3a; --blood:#a3242c;
+  --display:"Fondamento", "Palatino Linotype", Georgia, serif;
+  --body:"Alegreya", Georgia, serif;
+  --pixel:"Pixelify Sans", ui-monospace, monospace;
+  --step:6px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  background:var(--night); color:var(--moon); font-family:var(--body);
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+.px{image-rendering:pixelated; image-rendering:crisp-edges; display:block}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ───────── Scene ───────── */
+.scene{position:fixed; inset:0; z-index:0; overflow:hidden;
+  background:
+    radial-gradient(ellipse 60% 45% at 30% 12%, rgba(120,135,210,.35), transparent 70%),
+    linear-gradient(180deg,#1a2147 0%,#26305f 38%,#1b2248 70%,#0f1430 100%);
+}
+.moon{position:absolute; left:calc(23vw + 40px); top:-40px; width:clamp(180px,17vw,280px); aspect-ratio:1; border-radius:50%;
+  background:
+    radial-gradient(circle at 62% 38%, rgba(150,158,205,.55) 0 7%, transparent 8%),
+    radial-gradient(circle at 35% 62%, rgba(150,158,205,.45) 0 11%, transparent 12%),
+    radial-gradient(circle at 70% 70%, rgba(150,158,205,.35) 0 6%, transparent 7%),
+    radial-gradient(circle at 28% 30%, rgba(160,168,212,.4) 0 5%, transparent 6%),
+    radial-gradient(circle at 40% 38%, #fbfbff, #d6dbf5 55%, #a4acd8 100%);
+  box-shadow:0 0 70px 24px rgba(195,205,255,.28), 0 0 160px 60px rgba(120,135,220,.18);
+}
+.cloud{position:absolute; border-radius:50%; filter:blur(22px); background:rgba(42,50,92,.85); animation:drift 90s linear infinite alternate}
+.cloud.c1{left:18vw; top:110px; width:38vw; height:90px}
+.cloud.c2{left:42vw; top:40px; width:30vw; height:70px; animation-duration:120s; opacity:.8}
+.cloud.c3{left:-6vw; top:260px; width:34vw; height:110px; animation-duration:140s; opacity:.7}
+@keyframes drift{to{transform:translateX(7vw)}}
+.castle{position:absolute; left:41vw; top:1vh; width:min(30vw,520px); height:auto; opacity:.95}
+.castle .win{fill:#ffcf76; animation:flick 4s steps(2) infinite}
+.castle .win:nth-child(3n){animation-delay:-1.3s}
+.castle .win:nth-child(4n){animation-delay:-2.1s; animation-duration:6s}
+@keyframes flick{0%,100%{opacity:1}50%{opacity:.55}}
+.fog{position:absolute; left:0; right:0; height:40vh; bottom:18vh;
+  background:linear-gradient(180deg,transparent,rgba(52,64,118,.55) 55%,transparent)}
+.arch{position:absolute; left:0; top:0; height:100%; width:auto}
+.stairs{position:absolute; left:0; bottom:0; width:min(58vw,880px); height:auto}
+.lamp-glow{position:absolute; width:120px; height:120px; border-radius:50%; transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(255,200,110,.55),rgba(255,170,70,.12) 45%,transparent 70%);
+  animation:glow 3.2s ease-in-out infinite alternate}
+@keyframes glow{to{opacity:.65; transform:translate(-50%,-50%) scale(.9)}}
+.vine{position:absolute; width:46px; height:auto}
+
+.hero{position:fixed; right:0; top:0; height:100vh; width:auto; max-width:none; z-index:1;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 22%);
+  transition:transform .6s ease-out}
+#fx{position:fixed; inset:0; z-index:2; pointer-events:none}
+
+/* ───────── Layout ───────── */
+.stage{position:relative; z-index:3; min-height:100vh; padding:28px 0 28px clamp(24px,4vw,64px);
+  display:grid; grid-template-columns:250px minmax(360px,520px); column-gap:34px; align-content:start}
+.masthead{grid-column:1 / -1; text-align:center; margin:0 0 22px; max-width:810px}
+.cats{display:flex; justify-content:center; gap:6px; margin-bottom:-4px}
+.cats{position:relative; align-items:flex-end}
+.cats img{width:96px; height:auto; filter:drop-shadow(0 0 6px rgba(255,230,190,.45))}
+.cat-spark{color:#fff2c6; font-size:14px; animation:twk 2s ease-in-out infinite}
+.cat-spark.s1{align-self:center}.cat-spark.s2{align-self:flex-start; animation-delay:-1s}
+.title-row{display:flex; align-items:center; justify-content:center; gap:14px}
+.laurel{width:52px; height:auto; color:var(--gold); filter:drop-shadow(0 0 6px rgba(242,198,109,.6))}
+.laurel.r{transform:scaleX(-1)}
+h1{font-family:var(--display); font-weight:400; font-size:clamp(38px,4.4vw,60px); margin:0; line-height:1.05;
+  color:#fff6df; text-shadow:0 0 12px rgba(255,214,140,.55), 0 2px 0 #4a2f15}
+.tagline{font-family:var(--display); font-size:19px; color:#e9e6ff; letter-spacing:.04em; margin-top:8px; display:flex; justify-content:center; gap:14px; align-items:center}
+.tagline i{color:var(--gold); font-style:normal; font-size:12px}
+.rule{display:flex; align-items:center; justify-content:center; gap:8px; margin:6px auto 0; width:min(380px,80%)}
+.rule::before,.rule::after{content:""; flex:1; height:2px; background:linear-gradient(90deg,transparent,var(--gold))}
+.rule::after{transform:scaleX(-1)}
+.rule span{width:9px; height:9px; background:var(--gold); transform:rotate(45deg); box-shadow:0 0 8px var(--gold)}
+
+/* ───────── Pixel frames ───────── */
+.stepped{clip-path:polygon(0 var(--step),var(--step) var(--step),var(--step) 0,calc(100% - var(--step)) 0,calc(100% - var(--step)) var(--step),100% var(--step),100% calc(100% - var(--step)),calc(100% - var(--step)) calc(100% - var(--step)),calc(100% - var(--step)) 100%,var(--step) 100%,var(--step) calc(100% - var(--step)),0 calc(100% - var(--step)))}
+.plank{--step:6px; display:block; background:linear-gradient(180deg,#d99a4a,#8a5424 55%,#5a3214); padding:4px}
+.plank-face{--step:4px; display:flex; align-items:center; gap:14px;
+  background:linear-gradient(180deg,#f8e2ae,#e8bd72 60%,#d9a253);
+  box-shadow:inset 0 2px 0 rgba(255,250,225,.75), inset 0 -4px 0 rgba(150,90,30,.45), inset 0 0 0 2px rgba(120,70,25,.25);
+  color:var(--ink); font-family:var(--display)}
+
+/* nav */
+nav.menu{display:flex; flex-direction:column; gap:22px; padding-top:20px; position:relative}
+.nav-btn{position:relative; display:block; text-decoration:none;
+  filter:drop-shadow(0 0 6px rgba(255,190,100,.25)) drop-shadow(0 6px 6px rgba(0,0,0,.45));
+  transition:transform .18s, filter .18s}
+.nav-btn .plank-face{padding:12px 18px; font-size:26px; min-height:66px}
+.nav-btn canvas{width:40px; height:40px; flex:none}
+.nav-btn img.avatar{width:42px; height:42px; flex:none; border:2px solid #6b3f1d; box-shadow:0 0 0 2px #f8e2ae}
+.nav-btn .lbl{flex:1; text-align:center; padding-right:8px; text-shadow:0 1px 0 rgba(255,245,215,.8)}
+.nav-btn .plank-face{position:relative}
+.nav-btn .plank-face::before{content:""; position:absolute; inset:5px; border:2px solid rgba(120,70,25,.45); pointer-events:none;
+  clip-path:polygon(0 3px,3px 3px,3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px))}
+.btn-vine{position:absolute; z-index:2; pointer-events:none}
+.nav-btn:hover{transform:translateX(5px); filter:drop-shadow(0 0 12px rgba(255,200,110,.55)) drop-shadow(0 6px 6px rgba(0,0,0,.45))}
+.nav-btn[aria-current="page"]{filter:drop-shadow(0 0 14px rgba(255,205,120,.85)) drop-shadow(0 0 3px #fff2c6)}
+.nav-btn[aria-current="page"]::after{content:""; position:absolute; right:-20px; top:50%; transform:translateY(-50%);
+  border:12px solid transparent; border-left:16px solid #e8b064; filter:drop-shadow(0 0 4px rgba(255,200,110,.9))}
+.nav-btn .spark{position:absolute; color:#fff2c6; font-size:13px; opacity:0; pointer-events:none}
+.nav-btn[aria-current="page"] .spark{opacity:1; animation:twk 1.6s ease-in-out infinite}
+.nav-btn .spark.a{top:-10px; right:24px}.nav-btn .spark.b{bottom:-8px; left:-6px; animation-delay:-.8s}
+@keyframes twk{50%{opacity:.2; transform:scale(.6)}}
+.nav-flower{position:absolute; width:42px; pointer-events:none}
+
+/* panel */
+.panel-wrap{position:relative; padding-top:26px; align-self:start}
+.panel{position:relative; filter:drop-shadow(0 0 18px rgba(255,190,100,.32)) drop-shadow(0 14px 22px rgba(0,0,0,.55))}
+.panel-frame{--step:10px; background:linear-gradient(180deg,#d99a4a,#8a5424 40%,#5a3214); padding:9px}
+.panel-inner{--step:6px; position:relative; color:var(--ink);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 40%, #fbf0d6 0%, #f1ddb2 60%, #dfc08a 100%);
+  box-shadow:inset 0 0 0 3px #f9ecd0, inset 0 0 0 5px #b8874a, inset 0 0 50px rgba(150,95,35,.35)}
+.panel-inner::before{content:""; position:absolute; inset:12px; border:1.5px dashed rgba(150,100,45,.45); pointer-events:none}
+.panel-body{position:relative; padding:44px 30px 26px; max-height:calc(100vh - 250px); min-height:440px; overflow:auto; scrollbar-width:thin; scrollbar-color:#b8874a transparent}
+.panel-tab{display:inline-block; position:absolute; top:4px; left:46px; z-index:4; filter:drop-shadow(0 4px 4px rgba(0,0,0,.35)) drop-shadow(0 0 8px rgba(255,200,110,.4))}
+.panel-tab .plank-face{padding:6px 26px; font-size:30px; gap:10px}
+.panel-tab .plank-face::before,.panel-tab .plank-face::after{content:"✦"; font-size:12px; color:#9b5f22}
+.lantern{position:absolute; right:26px; top:2px; z-index:4; transform-origin:50% 0; animation:sway 5s ease-in-out infinite}
+.lantern::before{content:""; position:absolute; left:50%; top:-14px; width:2px; height:16px; background:#3b210d}
+.lantern canvas{width:36px; height:60px}
+.lantern .halo{position:absolute; left:50%; top:62%; width:110px; height:110px; transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle,rgba(255,206,110,.55),transparent 65%); animation:glow 2.4s ease-in-out infinite alternate; pointer-events:none}
+@keyframes sway{50%{transform:rotate(3deg)}}
+.corner-flower{position:absolute; z-index:4; pointer-events:none}
+.corner-flower.tl{left:-26px; top:6px; width:70px}
+.corner-flower.br{right:-22px; bottom:-20px; width:84px}
+.corner-flower.bl{left:-16px; bottom:-16px; width:46px}
+
+[hidden]{display:none !important}
+section{animation:unroll .45s ease-out}
+@keyframes unroll{from{opacity:0; transform:translateY(8px)}}
+h2.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+h3{font-family:var(--display); font-weight:400; margin:0; color:var(--ink)}
+p{line-height:1.5; margin:.6em 0}
+.lead{font-size:17px}
+.muted{color:var(--ink-soft)}
+
+/* about */
+.scene-art{width:185px; height:auto; display:block; image-rendering:auto; -webkit-mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 78%,transparent 100%); mask-image:radial-gradient(ellipse 72% 70% at 50% 52%,#000 78%,transparent 100%)}
+.hello{display:grid; grid-template-columns:185px 1fr; gap:22px; align-items:start}
+.hello h3{font-size:30px; margin-top:4px}
+.hello h3 .heart{color:var(--blood); font-size:22px}
+.divider{display:flex; align-items:center; gap:10px; margin:20px 0 14px}
+.divider::before,.divider::after{content:""; flex:1; height:2px; background:linear-gradient(90deg,transparent,#b8874a)}
+.divider::after{transform:scaleX(-1)}
+.divider span{color:#c08a3e; font-size:16px}
+.trinkets{display:flex; justify-content:space-around; flex-wrap:wrap; gap:8px; margin:6px 0}
+.trinket{position:relative; display:flex; flex-direction:column; align-items:center; gap:4px; background:none; border:0; padding:4px; cursor:default; color:var(--ink-soft); font:12px var(--pixel)}
+.trinket canvas{width:42px; height:42px; transition:transform .2s}
+.trinket:hover canvas,.trinket:focus-visible canvas{transform:translateY(-4px) scale(1.08)}
+.quest{margin-top:18px; padding:14px 16px; background:rgba(255,250,235,.45); border:2px solid #b8874a; box-shadow:3px 3px 0 rgba(120,70,25,.3)}
+.quest .label{font:600 12px var(--pixel); letter-spacing:.08em; text-transform:uppercase; color:#8a5424; display:flex; justify-content:space-between; align-items:center; gap:8px}
+.quest p{margin:.4em 0 0}
+.inventory{display:grid; gap:12px; margin-top:16px}
+.inventory h4{margin:0 0 6px; font:600 13px var(--pixel); text-transform:uppercase; letter-spacing:.08em; color:#8a5424}
+
+.chips{display:flex; flex-wrap:wrap; gap:6px; padding:0; margin:0; list-style:none}
+.chips li{font:13px var(--pixel); color:var(--ink); background:#ead39f; border:2px solid #a7783f; padding:2px 8px; box-shadow:inset 0 -2px 0 rgba(140,90,40,.25)}
+.pill{font:600 11px var(--pixel); letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; color:#fff; white-space:nowrap}
+.pill.wip{background:var(--rose); box-shadow:0 0 0 2px #2c3a8a}
+.pill.done{background:var(--leaf); box-shadow:0 0 0 2px #2d5a26}
+.pill.built{background:#b0702a; box-shadow:0 0 0 2px #6b3f1d}
+
+/* projects */
+.tabs{display:flex; gap:10px; margin-bottom:18px}
+.tab{--step:4px; font:22px var(--display); color:var(--ink); background:#e9cf96; border:0; padding:6px 16px 6px 14px; cursor:pointer;
+  box-shadow:inset 0 0 0 2px #a7783f, inset 0 -4px 0 rgba(140,90,40,.3); display:flex; align-items:center; gap:8px}
+.tab canvas{width:24px; height:24px}
+.tab .count{font:600 12px var(--pixel); background:#a7783f; color:#fff6df; padding:1px 6px}
+.tab[aria-selected="true"]{background:linear-gradient(180deg,#a8662c,#5a3214); color:#fff6df; box-shadow:inset 0 0 0 2px #3b210d, inset 0 2px 0 rgba(255,220,160,.4)}
+.tab[aria-selected="true"] .count{background:#f2c66d; color:#3b210d}
+.cards{display:grid; gap:16px}
+.card{position:relative; display:grid; grid-template-columns:64px 1fr; gap:14px; padding:14px; background:rgba(255,250,235,.5);
+  border:2px solid #b8874a; box-shadow:4px 4px 0 rgba(120,70,25,.28); transition:transform .2s, box-shadow .2s}
+.card:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 rgba(120,70,25,.3), 0 0 14px rgba(242,198,109,.5)}
+.thumb{width:64px; height:64px; display:grid; place-items:center; background:#1c2347; border:3px solid #5a3214; box-shadow:inset 0 0 0 2px #2d3870}
+.thumb canvas{width:48px; height:48px}
+.card .meta{display:flex; align-items:center; gap:8px; flex-wrap:wrap; font:12px var(--pixel); color:#8a5424; text-transform:uppercase; letter-spacing:.06em}
+.card h3{font-size:24px; margin:4px 0 2px}
+.card p{margin:.3em 0 .7em; font-size:15.5px}
+.card details{margin-top:10px; font-size:15px}
+.card summary{cursor:pointer; font:600 13px var(--pixel); color:#6b3f1d; list-style:none; display:inline-flex; align-items:center; gap:6px}
+.card summary::-webkit-details-marker{display:none}
+.card summary::before{content:"▸"; transition:transform .2s}
+.card details[open] summary::before{transform:rotate(90deg)}
+.card details ul{margin:8px 0 0; padding-left:18px}
+.card details li{margin:4px 0; line-height:1.4}
+.card .links{margin-top:10px; display:flex; gap:10px}
+.btn{--step:3px; display:inline-flex; align-items:center; gap:6px; font:600 13px var(--pixel); text-decoration:none; color:#fff6df; background:linear-gradient(180deg,#8a5424,#5a3214); padding:6px 12px; border:0; cursor:pointer; box-shadow:inset 0 2px 0 rgba(255,220,160,.35)}
+.btn:hover{background:linear-gradient(180deg,#a8662c,#6b3f1d)}
+.btn.alt{background:linear-gradient(180deg,#5e72d6,#3c4ea8)}
+.btn.alt:hover{background:linear-gradient(180deg,#7084e6,#4c5fc4)}
+
+/* linked */
+.link-list{display:grid; gap:14px; list-style:none; padding:0; margin:14px 0 0}
+.link-row{display:grid; grid-template-columns:48px 1fr auto; align-items:center; gap:14px; padding:10px 14px; text-decoration:none; color:var(--ink);
+  background:rgba(255,250,235,.5); border:2px solid #b8874a; box-shadow:4px 4px 0 rgba(120,70,25,.28); transition:transform .2s, box-shadow .2s}
+.link-row:hover{transform:translateX(4px); box-shadow:4px 4px 0 rgba(120,70,25,.28), 0 0 14px rgba(242,198,109,.6)}
+.link-row canvas{width:40px; height:40px}
+.link-row strong{font:24px var(--display); font-weight:400; display:block}
+.link-row small{font:13px var(--pixel); color:var(--ink-soft)}
+.link-row .go{font:600 18px var(--pixel); color:#8a5424}
+
+/* contact */
+.letter-head{display:flex; gap:16px; align-items:center}
+.letter-head canvas{width:64px; height:48px}
+.email{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:14px 0 6px; padding:10px 14px; background:rgba(255,250,235,.55); border:2px solid #b8874a}
+.email code{font:18px var(--body); color:var(--ink); word-break:break-all; flex:1}
+.toast{font:12px var(--pixel); color:var(--leaf); min-height:16px}
+form.letter{display:grid; gap:12px; margin-top:12px}
+form.letter label{font:600 12px var(--pixel); text-transform:uppercase; letter-spacing:.08em; color:#8a5424; display:grid; gap:4px}
+form.letter input, form.letter textarea{font:16px var(--body); color:var(--ink); background:rgba(255,252,242,.75); border:2px solid #b8874a; padding:8px 10px; resize:vertical; box-shadow:inset 2px 2px 0 rgba(140,90,40,.18)}
+form.letter input:focus, form.letter textarea:focus{outline:2px solid var(--rose); outline-offset:0}
+form.letter .btn{justify-self:start; font-size:14px; padding:8px 16px}
+
+footer{grid-column:1 / -1; margin-top:22px; font:12px var(--pixel); color:rgba(225,228,255,.55); max-width:810px; text-align:center}
+
+/* ───────── Responsive ───────── */
+@media (max-width:1100px){
+  .stage{grid-template-columns:210px minmax(320px,480px); column-gap:28px}
+  .nav-btn .plank-face{font-size:22px; padding:10px 14px}
+}
+@media (max-width:860px){
+  .hero{left:50%; right:auto; transform:translateX(-50%); width:100vw; height:100vh; object-fit:cover; object-position:60% top; opacity:.42;
+    -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%); mask-image:linear-gradient(180deg,#000 30%,transparent 95%)}
+  .castle,.stairs,.cloud.c2{display:none}
+  .moon{left:auto; right:-40px; top:-60px}
+  .stage{grid-template-columns:1fr; padding:22px 16px 30px; max-width:560px; margin:0 auto}
+  nav.menu{display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-top:0; margin-bottom:10px}
+  .nav-btn .plank-face{font-size:19px; min-height:54px; padding:8px 10px; gap:8px}
+  .nav-btn canvas{width:30px; height:30px}
+  .nav-btn img.avatar{width:32px; height:32px}
+  .btn-vine{display:none}
+  .nav-btn[aria-current="page"]::after{display:none}
+  .nav-btn:hover{transform:translateY(-2px)}
+  .nav-flower{display:none}
+  .panel-body{max-height:none; min-height:0; padding:44px 20px 24px}
+  .hello{grid-template-columns:1fr; justify-items:center; text-align:center}
+  .hello > div{text-align:left}
+  .corner-flower.tl{left:-12px; width:56px}
+  .corner-flower.br{right:-10px; width:64px}
+  .arch,.vine{display:none}
+}
+@media (max-width:420px){
+  .panel-tab .plank-face{font-size:24px; padding:5px 16px}
+  .card{grid-template-columns:1fr}
+  .thumb{width:56px; height:56px}
+  .link-row{grid-template-columns:40px 1fr auto; gap:10px}
+  .link-row strong{font-size:20px}
+  .tagline{font-size:15px; gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ───────── Background scene ───────── -->
+<div class="scene" aria-hidden="true">
+  <div class="moon"></div>
+  <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+
+  <svg class="castle" viewBox="0 0 640 520" preserveAspectRatio="xMidYMin meet">
+    <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f3a72"/><stop offset="1" stop-color="#1a2149"/></linearGradient></defs>
+    <g fill="url(#cg)">
+      <rect x="30" y="300" width="580" height="220"/>
+      <rect x="60" y="230" width="46" height="290"/><polygon points="54,232 83,140 112,232"/>
+      <rect x="150" y="190" width="58" height="330"/><polygon points="144,192 179,80 214,192"/>
+      <rect x="240" y="250" width="70" height="270"/><polygon points="234,252 275,170 316,252"/>
+      <rect x="330" y="130" width="84" height="390"/><polygon points="322,132 372,0 422,132"/>
+      <rect x="318" y="118" width="108" height="16"/>
+      <rect x="440" y="210" width="54" height="310"/><polygon points="434,212 467,110 500,212"/>
+      <rect x="520" y="260" width="44" height="260"/><polygon points="514,262 542,180 570,262"/>
+      <path d="M30 300h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h12v-12h12v12h4z"/>
+    </g>
+    <g>
+      <rect class="win" x="78" y="270" width="10" height="16" rx="5"/>
+      <rect class="win" x="172" y="230" width="12" height="20" rx="6"/>
+      <rect class="win" x="172" y="300" width="12" height="20" rx="6"/>
+      <rect class="win" x="268" y="290" width="12" height="18" rx="6"/>
+      <rect class="win" x="362" y="170" width="18" height="28" rx="9"/>
+      <rect class="win" x="350" y="250" width="12" height="20" rx="6"/>
+      <rect class="win" x="384" y="250" width="12" height="20" rx="6"/>
+      <rect class="win" x="362" y="340" width="18" height="26" rx="9"/>
+      <rect class="win" x="460" y="250" width="12" height="20" rx="6"/>
+      <rect class="win" x="536" y="300" width="10" height="16" rx="5"/>
+      <rect class="win" x="110" y="360" width="10" height="16" rx="5"/>
+      <rect class="win" x="440" y="380" width="10" height="16" rx="5"/>
+      <rect class="win" x="560" y="390" width="10" height="16" rx="5"/>
+    </g>
+  </svg>
+  <div class="fog"></div>
+
+  <svg class="stairs" viewBox="0 0 880 300" preserveAspectRatio="xMinYMax meet">
+    <g fill="#161c3c">
+      <path d="M0 300V170h40v-30h50v30h660l130 130z"/>
+    </g>
+    <g fill="#1f2753">
+      <path d="M380 300l40-24h300l60 24z"/><path d="M400 276l36-22h270l44 22z"/><path d="M420 254l32-20h240l36 20z"/>
+      <path d="M440 234l28-18h212l34 18z"/><path d="M458 216l24-16h188l32 16z"/>
+    </g>
+    <g stroke="#2a3366" stroke-width="2" fill="none">
+      <path d="M380 300l78-84M780 300l-78-100"/>
+    </g>
+    <g fill="#10152f">
+      <rect x="60" y="120" width="10" height="180"/><rect x="48" y="100" width="34" height="26"/><polygon points="44,100 65,82 86,100"/>
+      <rect x="230" y="150" width="9" height="150"/><rect x="219" y="132" width="31" height="22"/><polygon points="215,132 234,116 254,132"/>
+      <rect x="400" y="190" width="7" height="110"/><rect x="392" y="176" width="23" height="18"/><polygon points="389,176 403,164 418,176"/>
+      <rect x="0" y="210" width="380" height="8"/>
+      <g>
+        <rect x="10" y="218" width="6" height="40"/><rect x="40" y="218" width="6" height="40"/><rect x="90" y="218" width="6" height="40"/>
+        <rect x="120" y="218" width="6" height="40"/><rect x="150" y="218" width="6" height="40"/><rect x="180" y="218" width="6" height="40"/>
+        <rect x="260" y="218" width="6" height="40"/><rect x="290" y="218" width="6" height="40"/><rect x="320" y="218" width="6" height="40"/><rect x="350" y="218" width="6" height="40"/>
+      </g>
+      <rect x="0" y="256" width="380" height="8"/>
+    </g>
+    <g fill="#ffd27a">
+      <rect x="52" y="104" width="26" height="18"/><rect x="223" y="136" width="23" height="15"/><rect x="395" y="179" width="17" height="12"/>
+    </g>
+  </svg>
+  <div class="lamp-glow" id="lg1"></div><div class="lamp-glow" id="lg2"></div><div class="lamp-glow" id="lg3"></div>
+
+  <svg class="arch" viewBox="0 0 160 1000" preserveAspectRatio="xMinYMin meet">
+    <defs><linearGradient id="st" x1="0" x2="1"><stop offset="0" stop-color="#0d1129"/><stop offset="1" stop-color="#1c2348"/></linearGradient></defs>
+    <path d="M0 0h160c-50 20-82 70-92 150v850H0z" fill="url(#st)"/>
+    <g stroke="#2a3263" stroke-width="2" fill="none">
+      <path d="M0 220h68M0 380h68M0 540h68M0 700h68M0 860h68M34 220v160M20 380v160M44 540v160M24 700v160"/>
+      <path d="M68 150c10-80 42-130 92-150"/>
+    </g>
+  </svg>
+  <canvas class="vine px" data-sprite="ivy" style="left:40px;top:120px"></canvas>
+  <canvas class="vine px" data-sprite="rose" style="left:18px;top:250px;width:34px"></canvas>
+  <canvas class="vine px" data-sprite="ivy" style="left:52px;top:330px"></canvas>
+  <canvas class="vine px" data-sprite="hydrangea" style="left:8px;top:470px;width:54px"></canvas>
+  <canvas class="vine px" data-sprite="rose" style="left:100px;top:40px;width:30px"></canvas>
+</div>
+
+<img class="hero" id="hero" src="images/hero.webp" alt="">
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<!-- ───────── Content ───────── -->
+<div class="stage">
+  <header class="masthead">
+    
+    <div class="title-row">
+      <svg class="laurel" viewBox="0 0 52 60" aria-hidden="true"><g fill="currentColor"><path d="M44 58C20 50 8 32 12 6" stroke="currentColor" stroke-width="2" fill="none"/><ellipse cx="10" cy="14" rx="3" ry="7" transform="rotate(-20 10 14)"/><ellipse cx="18" cy="12" rx="3" ry="7" transform="rotate(40 18 12)"/><ellipse cx="10" cy="28" rx="3" ry="7" transform="rotate(-35 10 28)"/><ellipse cx="20" cy="26" rx="3" ry="7" transform="rotate(50 20 26)"/><ellipse cx="16" cy="41" rx="3" ry="7" transform="rotate(-50 16 41)"/><ellipse cx="27" cy="38" rx="3" ry="7" transform="rotate(60 27 38)"/><ellipse cx="28" cy="52" rx="3" ry="7" transform="rotate(-65 28 52)"/></g></svg>
+      <h1>Emmanuel Lopez</h1>
+      <svg class="laurel r" viewBox="0 0 52 60" aria-hidden="true"><g fill="currentColor"><path d="M44 58C20 50 8 32 12 6" stroke="currentColor" stroke-width="2" fill="none"/><ellipse cx="10" cy="14" rx="3" ry="7" transform="rotate(-20 10 14)"/><ellipse cx="18" cy="12" rx="3" ry="7" transform="rotate(40 18 12)"/><ellipse cx="10" cy="28" rx="3" ry="7" transform="rotate(-35 10 28)"/><ellipse cx="20" cy="26" rx="3" ry="7" transform="rotate(50 20 26)"/><ellipse cx="16" cy="41" rx="3" ry="7" transform="rotate(-50 16 41)"/><ellipse cx="27" cy="38" rx="3" ry="7" transform="rotate(60 27 38)"/><ellipse cx="28" cy="52" rx="3" ry="7" transform="rotate(-65 28 52)"/></g></svg>
+    </div>
+    <div class="rule" aria-hidden="true"><span></span></div>
+    <div class="tagline">Mechanical Engineering <i>✦</i> Research <i>✦</i> Code</div>
+  </header>
+
+  <nav class="menu" aria-label="Sections">
+    <a class="nav-btn" href="#about" data-route="about">
+      <canvas class="btn-vine px" data-sprite="hydrangea" style="left:-20px;top:14px;width:40px" aria-hidden="true"></canvas>
+      <span class="plank stepped"><span class="plank-face stepped"><img class="px avatar" src="images/avatar-pixel.png" alt=""><span class="lbl">About Me</span></span></span>
+      <span class="spark a" aria-hidden="true">✦</span><span class="spark b" aria-hidden="true">✧</span>
+    </a>
+    <a class="nav-btn" href="#projects" data-route="projects">
+      <canvas class="btn-vine px" data-sprite="ivy" style="right:-12px;bottom:-14px;width:30px" aria-hidden="true"></canvas>
+      <span class="plank stepped"><span class="plank-face stepped"><canvas class="px" data-sprite="gear" aria-hidden="true"></canvas><span class="lbl">Projects</span></span></span>
+      <span class="spark a" aria-hidden="true">✦</span><span class="spark b" aria-hidden="true">✧</span>
+    </a>
+    <a class="nav-btn" href="#linked" data-route="linked">
+      <canvas class="btn-vine px" data-sprite="ivy" style="left:-14px;top:-10px;width:30px" aria-hidden="true"></canvas>
+      <span class="plank stepped"><span class="plank-face stepped"><canvas class="px" data-sprite="chain" aria-hidden="true"></canvas><span class="lbl">Linked</span></span></span>
+      <span class="spark a" aria-hidden="true">✦</span><span class="spark b" aria-hidden="true">✧</span>
+    </a>
+    <a class="nav-btn" href="#contact" data-route="contact">
+      <canvas class="btn-vine px" data-sprite="ivy" style="right:-12px;bottom:-14px;width:30px" aria-hidden="true"></canvas>
+      <span class="plank stepped"><span class="plank-face stepped"><canvas class="px" data-sprite="envelope" aria-hidden="true"></canvas><span class="lbl">Contact Me</span></span></span>
+      <span class="spark a" aria-hidden="true">✦</span><span class="spark b" aria-hidden="true">✧</span>
+    </a>
+  </nav>
+
+  <main class="panel-wrap">
+    <div class="panel-tab"><span class="plank stepped"><span class="plank-face stepped" id="panelTitle">About Me</span></span></div>
+    <div class="lantern" aria-hidden="true"><span class="halo"></span><canvas class="px" data-sprite="lantern"></canvas></div>
+    <canvas class="corner-flower tl px" data-sprite="hydrangea" aria-hidden="true"></canvas>
+    <canvas class="corner-flower br px" data-sprite="hydrangea2" aria-hidden="true"></canvas>
+    <canvas class="corner-flower bl px" data-sprite="ivy" aria-hidden="true"></canvas>
+
+    <div class="panel">
+      <div class="panel-frame stepped"><div class="panel-inner stepped"><div class="panel-body" id="panelBody" tabindex="-1">
+
+        <!-- ABOUT -->
+        <section id="sec-about" data-title="About Me" aria-labelledby="t-about">
+          <h2 class="sr" id="t-about">About Me</h2>
+          <div class="hello">
+            <img class="scene-art" src="images/reading-scene.png" alt="Pixel art of a girl in a blue rose crown reading by a moonlit window, with a white cat asleep beside her" width="185" height="202">
+            <div>
+              <h3>Hello! <span class="heart">♡</span></h3>
+              <p class="lead">I'm <strong>Emmanuel Lopez</strong>, a mechanical engineer who also does some software engineering. I volunteer in undergraduate lab research, where I work on structural optimization and 3D-printed materials.</p>
+            </div>
+          </div>
+          <p>For my first research project, I studied density and sensitivity filtering in topology optimization using the 88-line MATLAB code (Andreassen et al., 2011). I then compared that benchmark code against a graduate mentor's research code to find where their filtering approaches and results differ.</p>
+          <p>Right now I'm designing lattice patterns for research on measuring Poisson's ratio, 3D-printed in flexible TPU.</p>
+
+          <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+          <div class="trinkets" role="list" aria-label="Things I work with">
+            <div class="trinket" role="listitem"><canvas class="px" data-sprite="gear"></canvas>CAD</div>
+            <div class="trinket" role="listitem"><canvas class="px" data-sprite="printer"></canvas>3D print</div>
+            <div class="trinket" role="listitem"><canvas class="px" data-sprite="lattice"></canvas>Lattices</div>
+            <div class="trinket" role="listitem"><canvas class="px" data-sprite="beam"></canvas>Topopt</div>
+            <div class="trinket" role="listitem"><canvas class="px" data-sprite="laptop"></canvas>Code</div>
+            <div class="trinket" role="listitem"><canvas class="px" data-sprite="catface"></canvas>Cats</div>
+          </div>
+
+          <div class="quest">
+            <div class="label"><span>⚔ Current quest</span><span class="pill wip">In progress</span></div>
+            <p>Design TPU lattice structures that let the lab measure Poisson's ratio on printed samples.</p>
+          </div>
+
+          <div class="inventory">
+            <div>
+              <h4>Engineering kit</h4>
+              <ul class="chips"><li>MATLAB</li><li>Topology optimization</li><li>FEA</li><li>CAD</li><li>3D printing</li><li>TPU</li><li>Materials testing</li></ul>
+            </div>
+            <div>
+              <h4>Software kit</h4>
+              <ul class="chips"><li>Python</li><li>Flask</li><li>JavaScript</li><li>Streamlit</li><li>pandas</li><li>Plotly</li><li>Claude API</li></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="sec-projects" data-title="Projects" aria-labelledby="t-projects" hidden>
+          <h2 class="sr" id="t-projects">Projects</h2>
+          <div class="tabs" role="tablist" aria-label="Project type">
+            <button class="tab stepped" role="tab" id="tab-mech" aria-controls="pane-mech" aria-selected="true"><canvas class="px" data-sprite="gear"></canvas>Mechanical <span class="count">2</span></button>
+            <button class="tab stepped" role="tab" id="tab-soft" aria-controls="pane-soft" aria-selected="false" tabindex="-1"><canvas class="px" data-sprite="laptop"></canvas>Software <span class="count">2</span></button>
+          </div>
+
+          <div class="cards" role="tabpanel" id="pane-mech" aria-labelledby="tab-mech">
+            <article class="card">
+              <div class="thumb"><canvas class="px" data-sprite="beam"></canvas></div>
+              <div>
+                <div class="meta"><span class="pill done">Completed</span><span>Undergrad research</span></div>
+                <h3>Topology Optimization Filtering</h3>
+                <p>Studied density and sensitivity filtering with the 88-line MATLAB code, then compared it against a graduate mentor's research code.</p>
+                <ul class="chips"><li>MATLAB</li><li>Topology optimization</li><li>FEA</li></ul>
+                <details>
+                  <summary>Field notes</summary>
+                  <ul>
+                    <li>Worked through the 88-line topology optimization code (Andreassen et al., 2011) as the benchmark.</li>
+                    <li>Studied how density filtering and sensitivity filtering each shape the optimized layout.</li>
+                    <li>Compared the benchmark against a graduate mentor's research code to find differences in filtering approach and in the results they produce.</li>
+                  </ul>
+                </details>
+              </div>
+            </article>
+            <article class="card">
+              <div class="thumb"><canvas class="px" data-sprite="lattice"></canvas></div>
+              <div>
+                <div class="meta"><span class="pill wip">In progress</span><span>Undergrad research</span></div>
+                <h3>TPU Lattice Structures</h3>
+                <p>Designing lattice patterns for research on measuring Poisson's ratio, 3D-printed in flexible TPU filament.</p>
+                <ul class="chips"><li>CAD</li><li>3D printing</li><li>TPU</li><li>Materials testing</li></ul>
+                <details>
+                  <summary>Field notes</summary>
+                  <ul>
+                    <li>Modeling lattice geometries in CAD for the lab's Poisson's ratio study.</li>
+                    <li>Printing samples in TPU so the structures can flex and deform under load.</li>
+                    <li>The printed lattices become test specimens for measuring how each pattern contracts or expands sideways.</li>
+                  </ul>
+                </details>
+              </div>
+            </article>
+          </div>
+
+          <div class="cards" role="tabpanel" id="pane-soft" aria-labelledby="tab-soft" hidden>
+            <article class="card">
+              <div class="thumb"><canvas class="px" data-sprite="coin"></canvas></div>
+              <div>
+                <div class="meta"><span class="pill wip">In progress</span><span>Web app</span></div>
+                <h3>Finance App V2</h3>
+                <p>A finance app for beginners. AI turns confusing financial information into plain English, but leaves the decisions to you.</p>
+                <ul class="chips"><li>Python</li><li>Flask</li><li>JavaScript</li><li>Claude API</li></ul>
+                <details>
+                  <summary>Features</summary>
+                  <ul>
+                    <li>Plain-English explanations of financial information, powered by the Claude API.</li>
+                    <li>Paper trading to practice without real money.</li>
+                    <li>Strategy backtests and a brokerage comparison.</li>
+                  </ul>
+                </details>
+                <div class="links"><a class="btn stepped" href="https://github.com/Eman12211e/finance-app-v2" target="_blank" rel="noopener">Repo ↗</a></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="thumb"><canvas class="px" data-sprite="chart"></canvas></div>
+              <div>
+                <div class="meta"><span class="pill built">Built</span><span>Tool</span></div>
+                <h3>Engineering Career Roadmap</h3>
+                <p>Helps mechanical engineering students build stronger resumes by ranking the skills employers ask for most.</p>
+                <ul class="chips"><li>Python</li><li>Streamlit</li><li>pandas</li><li>Plotly</li></ul>
+                <details>
+                  <summary>Features</summary>
+                  <ul>
+                    <li>Scans real job postings for mechanical engineering roles.</li>
+                    <li>Ranks the skills employers ask for most often.</li>
+                    <li>Shows which of those skills you're still missing.</li>
+                  </ul>
+                </details>
+                <div class="links"><a class="btn stepped" href="https://github.com/Eman12211e/engineering-career-roadmap" target="_blank" rel="noopener">Repo ↗</a></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- LINKED -->
+        <section id="sec-linked" data-title="Linked" aria-labelledby="t-linked" hidden>
+          <h2 class="sr" id="t-linked">Linked</h2>
+          <p class="lead">Where else to find me and my work.</p>
+          <ul class="link-list">
+            <li><a class="link-row" href="https://www.linkedin.com/in/emmanuel-l-271623219/" target="_blank" rel="noopener">
+              <canvas class="px" data-sprite="scroll" aria-hidden="true"></canvas><span><strong>LinkedIn</strong><small>Experience &amp; résumé</small></span><span class="go" aria-hidden="true">↗</span></a></li>
+            <li><a class="link-row" href="https://github.com/Eman12211e" target="_blank" rel="noopener">
+              <canvas class="px" data-sprite="chain" aria-hidden="true"></canvas><span><strong>GitHub</strong><small>@Eman12211e</small></span><span class="go" aria-hidden="true">↗</span></a></li>
+            <li><a class="link-row" href="https://github.com/Eman12211e/finance-app-v2" target="_blank" rel="noopener">
+              <canvas class="px" data-sprite="coin" aria-hidden="true"></canvas><span><strong>Finance App V2</strong><small>Repository</small></span><span class="go" aria-hidden="true">↗</span></a></li>
+            <li><a class="link-row" href="https://github.com/Eman12211e/engineering-career-roadmap" target="_blank" rel="noopener">
+              <canvas class="px" data-sprite="chart" aria-hidden="true"></canvas><span><strong>Career Roadmap</strong><small>Repository</small></span><span class="go" aria-hidden="true">↗</span></a></li>
+          </ul>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="sec-contact" data-title="Contact Me" aria-labelledby="t-contact" hidden>
+          <h2 class="sr" id="t-contact">Contact Me</h2>
+          <div class="letter-head">
+            <canvas class="px" data-sprite="envelope" aria-hidden="true"></canvas>
+            <p class="lead" style="margin:0">Email is the best way to reach me. I usually reply within a couple of days.</p>
+          </div>
+          <div class="email">
+            <code id="mail">eman.lop.1304@gmail.com</code>
+            <button class="btn stepped" type="button" id="copy">Copy</button>
+            <a class="btn alt stepped" href="mailto:eman.lop.1304@gmail.com">Open mail</a>
+          </div>
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+          <div class="divider" aria-hidden="true"><span>✉</span></div>
+          <h3 style="font-size:24px">Write a letter</h3>
+          <p class="muted" style="margin-top:2px">This opens your mail app with the letter filled in.</p>
+          <form class="letter" id="letter">
+            <label>Your name<input name="name" autocomplete="name" required></label>
+            <label>Message<textarea name="msg" rows="5" required></textarea></label>
+            <button class="btn stepped" type="submit">Seal &amp; send ✦</button>
+          </form>
+        </section>
+
+      </div></div></div>
+    </div>
+  </main>
+
+  <footer>© <span id="yr">2026</span> Emmanuel Lopez ✦ Built by hand, by moonlight</footer>
+</div>
+
+<script>
+(() => {
+  /* ───────── Pixel sprites ───────── */
+  const SPR = {
+    envelope:{pal:{o:'#4a2c14',w:'#f6e8c8',s:'#d9bf8c',r:'#b23a3a'},rows:[
+      'oooooooooooooooo','oowwwwwwwwwwwwoo','owowwwwwwwwwwowo','owwowwwwwwwwowwo','owwwowwwwwwowwwo','owwwwowwwwowwwwo',
+      'owwwwworrowwwwwo','owwwwwrrrrwwwwwo','owwwwwwrrwwwwwwo','owwwwwwwwwwwwwwo','osssssssssssssso','oooooooooooooooo']},
+    lantern:{pal:{o:'#2a1c10',m:'#7a5a34',g:'#ffcf6a',y:'#fff4c8',a:'#e8963a'},rows:[
+      '....o....','...ooo...','..ommmo..','.ommmmmo.','.oagggao.','.oggyggo.','.ogyyygo.','.ogyyygo.',
+      '.oggyggo.','.oagggao.','.ommmmmo.','..ommmo..','...ooo...','....o....','...ooo...']},
+    hydrangea:{pal:{b:'#6f86d6',B:'#a9bbf6',p:'#8a78d0',P:'#c0b0f2',d:'#3c4a8f',g:'#4e8a3a',G:'#7cbc58',k:'#2d5a26'},rows:[
+      '....bBb.pPp...','...bBBbdpPPp..','..bBdBbbpPdp..','.pPpbbdBbBbd..','pPPpdbBBbbd...','pPdpBbbdbbBb..',
+      '.pppbBBbdBBBb.','..dkbBbbkbBb..','.gGGkdbkGGgk..','gGGgk..kgGGgk.','.kgk....kgGk..','..k......kk...']},
+    hydrangea2:{pal:{b:'#8a78d0',B:'#c7b8f6',p:'#6f86d6',P:'#a9bbf6',d:'#4a3f8f',g:'#4e8a3a',G:'#7cbc58',k:'#2d5a26'},rows:[
+      '.....pPp.......','...bBbpPPpbBb..','..bBBbdpPdbBBb.','.bBdBbbpppbdBb.','..bbbdpPPpdbb..','.pPpPpPdpPpPp..',
+      'pPPpdpPPpdpPPp.','.pdp.gpppg.pdp.','..gGGkdddkGGg..','.gGGgk...kgGGg.','gGkk.......kkGg','.k...........k.']},
+    rose:{pal:{o:'#1f2550',b:'#3d4fb0',B:'#6f86e6',l:'#a9bbf6',g:'#4e8a3a',k:'#2d5a26'},rows:[
+      '...oooo...','..obBBbo..','.obBllBbo.','.oBlbbBbo.','.obBbBlbo.','..obbBbo..','...oooo...','..gk.kg...','.gGk.kgg..','..k...k...']},
+    ivy:{pal:{g:'#4e8a3a',G:'#7cbc58',k:'#2d5a26',s:'#3a2a1a'},rows:[
+      '.....s....','..gg.s....','.gGGks.kk.','..gks.kGGk','....s..kk.','..kks.....','.kGGs.....','..kks.gg..',
+      '....sgGGk.','.....skk..','..gg.s....','.gGGks....','..kk.s....','.....s.kk.','.....skGGk','.....s.kk.']},
+    catface:{pal:{o:'#5a3a2a',w:'#fff4e2',p:'#f2ad9f',e:'#3a2412'},rows:[
+      '.o..........o.','.oo........oo.','owpo......opwo','owpwoooooowpwo','owwwwwwwwwwwwo','owwewwwwwwewwo',
+      'owpwwwwwwwwpwo','owwwwwppwwwwwo','owwwwewwewwwwo','.owwwwwwwwwwo.','..oooooooooo..']},
+    printer:{pal:{o:'#2a2f45',F:'#c3c8da',f:'#8d94ad',n:'#e0a040',b:'#4b5370',p:'#6f86e6'},rows:[
+      'oooooooooooooo','oFFFFFFFFFFFFo','ofo.oooo...ofo','ofo.onno...ofo','ofo..nn....ofo','ofo...n....ofo','ofo........ofo',
+      'ofo..pppp..ofo','ofo..p..p..ofo','ofo..pppp..ofo','ofobbbbbbbbofo','ofoooooooooofo','offffffffffffo','oooooooooooooo']},
+    laptop:{pal:{o:'#2a2f45',s:'#1d2547',c:'#7fe0a8',C:'#8fb0ff',k:'#9aa1b8',K:'#c3c8da'},rows:[
+      '..oooooooooooo..','..osssssssssso..','..oscccsssssso..','..osssCCCCssso..','..osscccssssso..','..osssssCCCsso..',
+      '..osccssssssso..','..osssssssssso..','..oooooooooooo..','oKKKKKKKKKKKKKKo','okkkkkkookkkkkko','.oooooooooooooo.']},
+    beam:{pal:{o:'#1b1b22',g:'#cfd6ee'},rows:[
+      'gggggggggggggggggg','goooooooooooooooog','googggooggoogggoog','gogogoggooggogogog','goggogggoogggoggog',
+      'gogogoggooggogogog','googggooggoogggoog','goooooooooooooooog','gggggggggggggggggg']},
+    coin:{pal:{o:'#5a3a10',y:'#f2c66d',Y:'#fff0b0',d:'#c08a2e'},rows:[
+      '...oooooo...','..oyyyyyyo..','.oyYYyyyyyo.','oyYyyddyyyyo','oyYyddddyydo','oyyydyyyyydo',
+      'oyyyddddyydo','oyyyyyydyydo','oyyyddddyydo','.oyyyddyyddo','..oddddddo..','...oooooo...']},
+    chart:{pal:{o:'#2a2f45',b:'#6f86e6',g:'#7cbc58',y:'#f2c66d',w:'#e6e9f5'},rows:[
+      'o.............','o.........yy..','o.........yy..','o.....gg..yy..','o.....gg..yy..','o.bb..gg..yy..',
+      'o.bb..gg..yy..','o.bb..gg..yy..','oooooooooooooo']},
+    scroll:{pal:{o:'#4a2c14',w:'#f6e8c8',s:'#d9bf8c',i:'#6b4a2b'},rows:[
+      '.oooooooooooo.','osswwwwwwwwsso','.oswwwwwwwwso.','..owiiiiiwwo..','..owwwwwwwwo..','..owiiiiiiwo..',
+      '..owwwwwwwwo..','..owiiiwwwwo..','..owwwwwwwwo..','.osswwwwwwsso.','osswwwwwwwwsso','.oooooooooooo.']}
+  };
+  // Procedural sprites: gear, chain, lattice
+  function rowsFrom(w,h,fn){const r=[];for(let y=0;y<h;y++){let s='';for(let x=0;x<w;x++)s+=fn(x,y)||'.';r.push(s)}return r}
+  SPR.gear={pal:{o:'#2a2f45',g:'#9aa7c7',l:'#dbe2f4',d:'#5d6a8c'},rows:rowsFrom(16,16,(x,y)=>{
+    const dx=x-7.5,dy=y-7.5,r=Math.hypot(dx,dy),a=Math.atan2(dy,dx);
+    const outer=5+(Math.cos(8*a)>.25?2:0);
+    if(r>outer+.5||r<2)return'';
+    if(r>outer-.6||r<2.9)return'o';
+    return dy<-1.5?'l':dy>1.8?'d':'g'})};
+  SPR.chain={pal:{o:'#2a2f45',g:'#a9b4d4',l:'#e6ebfa'},rows:rowsFrom(16,16,(x,y)=>{
+    const seg=(ax,ay,bx,by)=>{const vx=bx-ax,vy=by-ay,t=Math.max(0,Math.min(1,((x-ax)*vx+(y-ay)*vy)/(vx*vx+vy*vy)));return Math.hypot(x-ax-t*vx,y-ay-t*vy)};
+    const d2=seg(8.5,7,12,3.5), d1=seg(3.5,12,7,8.5);
+    const pick=d=>d>=1.4&&d<=3.1?(d>2.6?'o':(x+y)%5===0?'l':'g'):'';
+    return pick(d2)||pick(d1)})};
+  SPR.lattice={pal:{o:'#4cc3c9',d:'#1f6f78'},rows:rowsFrom(16,16,(x,y)=>{
+    const u=((x%8)+8)%8, v=((y%8)+8)%8;
+    // re-entrant (auxetic) bow-tie cells
+    const onV = (u===0||u===7) && (v>=2&&v<=5);
+    const onBow = (v===1&&(u===1||u===6)) || (v===2&&(u===2||u===5)) || (v===3&&(u===3||u===4)) ||
+                  (v===6&&(u===1||u===6)) || (v===5&&(u===2||u===5)) || (v===4&&(u===3||u===4));
+    const onH = (v===0||v===7)&&(u===0||u===7||u===1||u===6);
+    return onV||onH?'d':onBow?'o':''})};
+
+  function draw(cv){
+    const s=SPR[cv.dataset.sprite]; if(!s)return;
+    const h=s.rows.length,w=Math.max(...s.rows.map(r=>r.length));
+    cv.width=w; cv.height=h;
+    const c=cv.getContext('2d');
+    s.rows.forEach((r,y)=>{for(let x=0;x<r.length;x++){const col=s.pal[r[x]];if(col){c.fillStyle=col;c.fillRect(x,y,1,1)}}});
+    // keep CSS aspect ratio honest when only width is set
+    if(!cv.style.height && getComputedStyle(cv).height==='auto') cv.style.aspectRatio=w+'/'+h;
+    cv.style.aspectRatio = w+'/'+h;
+  }
+  document.querySelectorAll('canvas[data-sprite]').forEach(draw);
+
+  /* ───────── Routing ───────── */
+  const routes=['about','projects','linked','contact'];
+  const title=document.getElementById('panelTitle'), body=document.getElementById('panelBody');
+  function show(initial){
+    let r=location.hash.slice(1); if(!routes.includes(r)) r='about';
+    routes.forEach(id=>{document.getElementById('sec-'+id).hidden = id!==r});
+    document.querySelectorAll('.nav-btn').forEach(a=>{
+      if(a.dataset.route===r) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current')});
+    title.textContent=document.getElementById('sec-'+r).dataset.title;
+    document.title=(r==='about'?'':title.textContent+' · ')+'Emmanuel Lopez · Mechanical Engineer';
+    body.scrollTop=0;
+    if(!initial && innerWidth<=860) document.querySelector('.panel-wrap').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  addEventListener('hashchange',()=>show(false)); show(true);
+
+  /* ───────── Project tabs ───────── */
+  const tabs=[...document.querySelectorAll('[role=tab]')];
+  function sel(t){tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on})}
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>sel(t));
+    t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length];sel(n);n.focus()}});
+  });
+
+  /* ───────── Contact ───────── */
+  const mail='eman.lop.1304@gmail.com', toast=document.getElementById('toast');
+  document.getElementById('copy').addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(mail)}catch{const r=document.createRange();r.selectNodeContents(document.getElementById('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy')}
+    toast.textContent='✦ Copied to clipboard'; setTimeout(()=>toast.textContent='',2400);
+  });
+  document.getElementById('letter').addEventListener('submit',e=>{
+    e.preventDefault(); const f=new FormData(e.target);
+    const subj='Hello from your portfolio, from '+f.get('name');
+    location.href='mailto:'+mail+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(f.get('msg')+'\n\n— '+f.get('name'));
+  });
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* ───────── Lamp glows follow the stair lanterns ───────── */
+  const stairs=document.querySelector('.stairs');
+  function placeLamps(){
+    const b=stairs.getBoundingClientRect(), k=b.width/880, top=b.bottom-300*k;
+    [[65,113],[234,143],[403,185]].forEach(([x,y],i)=>{const g=document.getElementById('lg'+(i+1));g.style.left=(b.left+x*k)+'px';g.style.top=(top+y*k)+'px';g.style.width=g.style.height=(150*k)+'px'});
+  }
+  placeLamps(); addEventListener('resize',placeLamps);
+
+  /* ───────── Petals, stars and sparkles ───────── */
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv=document.getElementById('fx'), ctx=cv.getContext('2d');
+  let W,H,dpr; const petals=[],stars=[],sparks=[];
+  const cols=['#5d74d6','#8ea2f2','#4f63c4','#a9b8ff','#7a8ee8'];
+  function resize(){dpr=Math.min(devicePixelRatio||1,1.5);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0)}
+  resize(); addEventListener('resize',resize);
+  const R=Math.random;
+  for(let i=0;i<70;i++)stars.push({x:R(),y:R()*.55,s:R()*1.4+.4,p:R()*6.3,v:.5+R()*1.5});
+  for(let i=0;i<(innerWidth<700?16:30);i++)petals.push({x:R()*W,y:R()*H,s:4+R()*6,vx:-.25-R()*.6,vy:.35+R()*.55,r:R()*6.3,vr:(R()-.5)*.03,p:R()*6.3,c:cols[i%cols.length]});
+  for(let i=0;i<22;i++)sparks.push({x:R(),y:R(),p:R()*6.3,v:.6+R()*1.2,s:2+R()*3});
+  function star4(x,y,s,a){ctx.globalAlpha=a;ctx.beginPath();ctx.moveTo(x,y-s);ctx.lineTo(x+s*.25,y-s*.25);ctx.lineTo(x+s,y);ctx.lineTo(x+s*.25,y+s*.25);ctx.lineTo(x,y+s);ctx.lineTo(x-s*.25,y+s*.25);ctx.lineTo(x-s,y);ctx.lineTo(x-s*.25,y-s*.25);ctx.closePath();ctx.fill()}
+  function frame(t){
+    t/=1000; ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#eef0ff';
+    for(const s of stars){ctx.globalAlpha=.35+.45*Math.sin(t*s.v+s.p)**2;ctx.fillRect(s.x*W,s.y*H,s.s,s.s)}
+    ctx.fillStyle='#fff2c6';
+    for(const s of sparks){const a=Math.max(0,Math.sin(t*s.v+s.p));if(a>.05)star4(s.x*W,s.y*H,s.s*(.6+a),a*.85)}
+    for(const p of petals){
+      if(!reduce){p.x+=p.vx+Math.sin(t+p.p)*.3;p.y+=p.vy;p.r+=p.vr;if(p.y>H+20||p.x<-20){p.x=R()*W*1.1+40;p.y=-20}}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.scale(1,.45+.4*Math.abs(Math.sin(t*1.3+p.p)));
+      ctx.globalAlpha=.85;ctx.fillStyle=p.c;ctx.beginPath();ctx.ellipse(0,0,p.s,p.s*.62,0,0,6.3);ctx.fill();
+      ctx.globalAlpha=.5;ctx.fillStyle='#dfe6ff';ctx.beginPath();ctx.ellipse(-p.s*.3,-p.s*.15,p.s*.35,p.s*.18,0,0,6.3);ctx.fill();ctx.restore();
+    }
+    ctx.globalAlpha=1;
+    if(!reduce && !document.hidden) raf=requestAnimationFrame(frame);
+  }
+  let raf=requestAnimationFrame(frame);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!reduce){cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)}});
+
+  /* ───────── Gentle parallax on the portrait ───────── */
+  const hero=document.getElementById('hero');
+  if(!reduce && matchMedia('(pointer:fine)').matches){
+    addEventListener('mousemove',e=>{
+      if(innerWidth<=860)return;
+      const x=(e.clientX/innerWidth-.5), y=(e.clientY/innerHeight-.5);
+      hero.style.transform=`translate(${x*-14}px,${y*-8}px) scale(1.02)`;
+    });
+  }
+})();
+</script>
+</body>
+</html>
