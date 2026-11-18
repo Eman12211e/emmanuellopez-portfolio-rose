@@ -455,7 +455,7 @@ form.letter .btn{justify-self:start; font-size:14px; padding:8px 16px}
           <h2 class="sr" id="t-projects">Projects</h2>
           <div class="tabs" role="tablist" aria-label="Project type">
             <button class="tab stepped" role="tab" id="tab-mech" aria-controls="pane-mech" aria-selected="true"><canvas class="px" data-sprite="gear"></canvas>Mechanical <span class="count">2</span></button>
-            <button class="tab stepped" role="tab" id="tab-soft" aria-controls="pane-soft" aria-selected="false" tabindex="-1"><canvas class="px" data-sprite="laptop"></canvas>Software <span class="count">2</span></button>
+            <button class="tab stepped" role="tab" id="tab-soft" aria-controls="pane-soft" aria-selected="false" tabindex="-1"><canvas class="px" data-sprite="laptop"></canvas>Software <span class="count">3</span></button>
           </div>
 
           <div class="cards" role="tabpanel" id="pane-mech" aria-labelledby="tab-mech">
@@ -496,6 +496,25 @@ form.letter .btn{justify-self:start; font-size:14px; padding:8px 16px}
           </div>
 
           <div class="cards" role="tabpanel" id="pane-soft" aria-labelledby="tab-soft" hidden>
+            <article class="card">
+              <div class="thumb"><canvas class="px" data-sprite="squid"></canvas></div>
+              <div>
+                <div class="meta"><span class="pill done">Completed</span><span>NASA Space Apps Challenge 2026</span></div>
+                <h3>Bobert – Astronaut Health Monitoring Dashboard</h3>
+                <p>Health monitoring software for astronauts on long missions, where a virtual pet reacts to the astronaut's vitals. Built by a three-person team in a 48-hour NASA hackathon.</p>
+                <ul class="chips"><li>Data research</li><li>JSON</li><li>NASA-STD-3001</li><li>Node.js</li></ul>
+                <details>
+                  <summary>My role</summary>
+                  <ul>
+                    <li>Led the research and data work for the team.</li>
+                    <li>Set safe, warning and critical thresholds for vitals, spacesuit and cabin readings from NASA-STD-3001, NASA's Human Research Roadmap and peer-reviewed spaceflight studies.</li>
+                    <li>Structured health, cabin and radiation data into JSON so it could be integrated into the UI without issues.</li>
+                    <li>Built realistic synthetic datasets from NASA, NOAA space weather and clinical sources to demo normal and emergency conditions.</li>
+                  </ul>
+                </details>
+                <div class="links"><a class="btn alt stepped" href="https://2026nasaspaceapphackathon.vercel.app/story.html" target="_blank" rel="noopener">Live demo ↗</a><a class="btn stepped" href="https://github.com/tortooga2/2026_nasa_space_app_hackathon" target="_blank" rel="noopener">Repo ↗</a></div>
+              </div>
+            </article>
             <article class="card">
               <div class="thumb"><canvas class="px" data-sprite="coin"></canvas></div>
               <div>
@@ -621,7 +640,10 @@ form.letter .btn{justify-self:start; font-size:14px; padding:8px 16px}
       'o.bb..gg..yy..','o.bb..gg..yy..','oooooooooooooo']},
     scroll:{pal:{o:'#4a2c14',w:'#f6e8c8',s:'#d9bf8c',i:'#6b4a2b'},rows:[
       '.oooooooooooo.','osswwwwwwwwsso','.oswwwwwwwwso.','..owiiiiiwwo..','..owwwwwwwwo..','..owiiiiiiwo..',
-      '..owwwwwwwwo..','..owiiiwwwwo..','..owwwwwwwwo..','.osswwwwwwsso.','osswwwwwwwwsso','.oooooooooooo.']}
+      '..owwwwwwwwo..','..owiiiwwwwo..','..owwwwwwwwo..','.osswwwwwwsso.','osswwwwwwwwsso','.oooooooooooo.']},
+    squid:{pal:{o:'#3b1d3f',p:'#f29bb8',P:'#ffd3e2',e:'#2a1c10'},rows:[
+      '....oooo....','...oppppo...','..oppPPppo..','.opppPPpppo.','.oppppppppo.','.opeppppepo.',
+      '.oppppppppo.','..oppppppo..','..oppppppo..','.opoppoppop.','.o.op..po.o.','o..o....o..o']}
   };
   // Procedural sprites: gear, chain, lattice
   function rowsFrom(w,h,fn){const r=[];for(let y=0;y<h;y++){let s='';for(let x=0;x<w;x++)s+=fn(x,y)||'.';r.push(s)}return r}
